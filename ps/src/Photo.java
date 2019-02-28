@@ -4,23 +4,23 @@ import java.util.Objects;
 
 public class Photo {
 
-    public int id;
+    public String id;
     public boolean orientation;
     public int noOfTags;
     public ArrayList<String> tags;
 
-    public Photo(int id, boolean orientation, int noOfTags, ArrayList<String> tags) {
+    public Photo(String id, boolean orientation, int noOfTags, ArrayList<String> tags) {
         this.id = id;
         this.orientation = orientation;
         this.noOfTags = noOfTags;
         this.tags = tags;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -49,13 +49,23 @@ public class Photo {
     }
 
     @Override
+    public String toString() {
+        return "Photo{" +
+                "id='" + id + '\'' +
+                ", orientation=" + orientation +
+                ", noOfTags=" + noOfTags +
+                ", tags=" + tags +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Photo photo = (Photo) o;
-        return id == photo.id &&
-                orientation == photo.orientation &&
+        return orientation == photo.orientation &&
                 noOfTags == photo.noOfTags &&
+                Objects.equals(id, photo.id) &&
                 Objects.equals(tags, photo.tags);
     }
 
@@ -63,15 +73,5 @@ public class Photo {
     public int hashCode() {
 
         return Objects.hash(id, orientation, noOfTags, tags);
-    }
-
-    @Override
-    public String toString() {
-        return "Photo{" +
-                "id=" + id +
-                ", orientation=" + orientation +
-                ", noOfTags=" + noOfTags +
-                ", tags=" + tags +
-                '}';
     }
 }

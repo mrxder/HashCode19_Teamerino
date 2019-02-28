@@ -4,9 +4,10 @@ public class Main {
 
     public static void main (String[] args){
 
-        String file = "c_memorable_moments.txt";
+        String file = "e_shiny_selfies.txt";
 
         ArrayList<Photo> photos = Util.readFile("src/input/"+file);
+        photos = Util.combineList(photos);
         ArrayList<Photo> slideShow = new ArrayList<>();
 
         int maxId = 0;
