@@ -64,7 +64,7 @@ public class Util {
                 ArrayList<String> tags = new ArrayList<>(tmpTags);
                 tags.remove(0);
                 tags.remove(0);
-                photos.add(new Photo(id, orientation, Integer.parseInt(splitedLine[1]), tags));
+                photos.add(new Photo(id+"", orientation, Integer.parseInt(splitedLine[1]), tags));
                 id++;
             }
 

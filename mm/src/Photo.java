@@ -2,12 +2,12 @@ import java.util.*;
 
 public class Photo {
 
-    public int id;
+    public String id;
     public boolean orientation;
     public int noOfTags;
     public ArrayList<String> tags;
 
-    public Photo(int id, boolean orientation, int noOfTags, ArrayList<String> tags) {
+    public Photo(String id, boolean orientation, int noOfTags, ArrayList<String> tags) {
         this.id = id;
         this.orientation = orientation;
         this.noOfTags = noOfTags;
@@ -49,11 +49,11 @@ public class Photo {
 
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
