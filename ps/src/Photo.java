@@ -53,7 +53,8 @@ public class Photo {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Photo photo = (Photo) o;
-        return orientation == photo.orientation &&
+        return id == photo.id &&
+                orientation == photo.orientation &&
                 noOfTags == photo.noOfTags &&
                 Objects.equals(tags, photo.tags);
     }
@@ -61,13 +62,14 @@ public class Photo {
     @Override
     public int hashCode() {
 
-        return Objects.hash(orientation, noOfTags, tags);
+        return Objects.hash(id, orientation, noOfTags, tags);
     }
 
     @Override
     public String toString() {
         return "Photo{" +
-                "orientation=" + orientation +
+                "id=" + id +
+                ", orientation=" + orientation +
                 ", noOfTags=" + noOfTags +
                 ", tags=" + tags +
                 '}';

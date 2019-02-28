@@ -38,26 +38,27 @@ public class Util {
         int result = 0;
 
         for (String t : p1Tags) {
-            if(p2Tags.contains(t)) {
-                result++;
+            for (String t2 : p2Tags){
+                if(t.equals(t2)){
+                    result++;
+                }
             }
         }
-
         return result;
     }
 
-    public static void writeFile(String file, ArrayList<String> lines){
+    public static void writeFile(String file, ArrayList<Photo> photos){
 
 
         try {
 
 
             BufferedWriter output = new BufferedWriter(new FileWriter(file, false));
-            output.write(lines.size());
+            output.write(photos.size());
             output.newLine();
 
-            for (String line : lines) {
-                output.write(line);
+            for (Photo line : photos) {
+                output.write(line.id);
                 output.newLine();
             }
 
