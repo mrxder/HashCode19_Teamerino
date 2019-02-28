@@ -6,7 +6,7 @@ public class Main {
 
         String file = "c_memorable_moments.txt";
 
-        ArrayList<Photo> photos = Util.readFile(file);
+        ArrayList<Photo> photos = Util.readFile("src/input/"+file);
         ArrayList<Photo> slideShow = new ArrayList<>();
 
         int maxId = 0;
@@ -39,16 +39,11 @@ public class Main {
         }
 
 
-        for (Photo g: slideShow) {
-
-            System.out.println(g);
-
-        }
         System.out.println(totalInterest+"");
 
 
 
-        Util.writeFile(file, photos);
+        Util.writeFile("src/results/" + file, slideShow);
 
     }
 }

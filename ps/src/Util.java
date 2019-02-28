@@ -53,12 +53,12 @@ public class Util {
         try {
 
 
-            BufferedWriter output = new BufferedWriter(new FileWriter(file, false));
-            output.write(photos.size());
+            BufferedWriter output = new BufferedWriter(new FileWriter(file, true));
+            output.write(""+photos.size());
             output.newLine();
 
             for (Photo line : photos) {
-                output.write(line.id);
+                output.write(""+line.id);
                 output.newLine();
             }
 
