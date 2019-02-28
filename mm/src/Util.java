@@ -8,17 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Util {
-
-    public static int calcInterestFactor(Photo p1, Photo p2){
-
-        int numOfCommonTags = numOfCommonTags(p1, p2);
-        int numOfTagsOnlyInP1 = p1.tags.size() - numOfCommonTags;
-        int numOfTagsOnlyInP2 = p2.tags.size() - numOfCommonTags;
-
-        if()
-
-
-    }
+    
 
 
     public static int numOfCommonTags(Photo p1, Photo p2){
