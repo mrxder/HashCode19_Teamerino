@@ -4,10 +4,15 @@ public class Main {
 
     public static void main (String[] args){
 
-        ArrayList<Photo> photos = Util.readFile("b_lovely_landscapes.txt");
+        String file = "e_shiny_selfies.txt";
+
+        ArrayList<Photo> photos = Util.readFile("src/input/"+file);
+        photos = Util.combineList(photos);
         ArrayList<Photo> slideShow = new ArrayList<>();
 
         int maxId = 0;
+        int max = 0;
+        int totalInterest = 0;
 
         while (photos.size() > 0) {
 
@@ -15,7 +20,7 @@ public class Main {
             photos.remove(maxId);
             slideShow.add(photo);
 
-            int max = 0;
+            max = 0;
             maxId = 0;
 
             for (int i = 0; i < photos.size(); i++) {
@@ -30,20 +35,16 @@ public class Main {
                 }
             }
 
-        }
-
-        for (Photo g: slideShow) {
-
-            System.out.println(g.id);
+            totalInterest += max;
 
         }
 
-        /*
-        ArrayList<String> strings = new ArrayList<>();
-        strings.add("A");
-        strings.add("A");
 
-        Util.writeFile("test.txt", strings);*/
+        System.out.println(totalInterest+"");
+
+
+
+        Util.writeFile("src/results/" + file, slideShow);
 
     }
 }

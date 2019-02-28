@@ -9,6 +9,98 @@ import java.util.List;
 
 public class Util {
 
+    public static ArrayList<Photo> combineList (ArrayList<Photo> photos){
+
+        ArrayList<Photo> HPhotos = new ArrayList<>();
+        ArrayList<Photo> VPhotos = new ArrayList<>();
+        for (Photo p : photos) {
+            if(p.orientation){
+                HPhotos.add(p);
+            }else{
+                VPhotos.add(p);
+            }
+        }
+
+        //combine Verticals
+        ArrayList<Photo> combinedVerticalPhotos = combineVerticals(VPhotos);
+
+        HPhotos.addAll(combinedVerticalPhotos);
+        return HPhotos;
+    }
+
+    private static ArrayList<Photo> combineVerticals(ArrayList<Photo> vPhotos) {
+        ArrayList<Photo> resultList = new ArrayList<>();
+
+        while(vPhotos.size() > 0){
+
+            Photo firstPhotoFromList = vPhotos.get(0);
+            vPhotos.remove(firstPhotoFromList);
+
+            Photo bestMatchPhoto = bestMatchFromList(firstPhotoFromList,vPhotos);
+            vPhotos.remove(bestMatchPhoto);
+
+            Photo finalPhoto = combinePhotos(firstPhotoFromList, bestMatchPhoto);
+            resultList.add(finalPhoto);
+        }
+
+        return resultList;
+    }
+
+    private static Photo combinePhotos(Photo a, Photo b) {
+
+        ArrayList<String> tmp = new ArrayList<>();
+
+        for (String g : b.tags) {
+            tmp.add(g);
+        }
+
+        ArrayList<String> tmp2 = removeDuplicates(tmp);
+
+        return new Photo(a.id+" "+b.id, false, tmp2.size() , tmp2);
+    }
+
+    // Function to remove duplicates from an ArrayList
+    public static <T> ArrayList<T> removeDuplicates(ArrayList<T> list)
+    {
+
+        // Create a new ArrayList
+        ArrayList<T> newList = new ArrayList<T>();
+
+        // Traverse through the first list
+        for (T element : list) {
+
+            // If this element is not present in newList
+            // then add it
+            if (!newList.contains(element)) {
+
+                newList.add(element);
+            }
+        }
+
+        // return the new list
+        return newList;
+    }
+
+    private static Photo bestMatchFromList(Photo firstPhotoFromList, ArrayList<Photo> vPhotos) {
+        int maxAmountOfTags = 0;
+        maxAmountOfTags = 0;
+        Photo result = null;
+        for(Photo p2 : vPhotos){
+            ArrayList<String> tags = firstPhotoFromList.tags;
+            tags.addAll(p2.tags);
+            ArrayList<String> photos = removeDuplicates(tags);
+            if (photos.size() > maxAmountOfTags){
+                maxAmountOfTags = photos.size();
+                result = p2;
+            }
+        }
+
+        return result;
+    }
+
+
+
+
     public static int calcInterestFactor(Photo p1, Photo p2){
 
         int numOfCommonTags = numOfCommonTags(p1, p2);
@@ -38,26 +130,27 @@ public class Util {
         int result = 0;
 
         for (String t : p1Tags) {
-            if(p2Tags.contains(t)) {
-                result++;
+            for (String t2 : p2Tags){
+                if(t.equals(t2)){
+                    result++;
+                }
             }
         }
-
         return result;
     }
 
-    public static void writeFile(String file, ArrayList<String> lines){
+    public static void writeFile(String file, ArrayList<Photo> photos){
 
 
         try {
 
 
-            BufferedWriter output = new BufferedWriter(new FileWriter(file, false));
-            output.write(lines.size());
+            BufferedWriter output = new BufferedWriter(new FileWriter(file, true));
+            output.write(""+photos.size());
             output.newLine();
 
-            for (String line : lines) {
-                output.write(line);
+            for (Photo line : photos) {
+                output.write(""+line.id);
                 output.newLine();
             }
 
@@ -83,7 +176,7 @@ public class Util {
                 ArrayList<String> tags = new ArrayList<>(tmpTags);
                 tags.remove(0);
                 tags.remove(0);
-                photos.add(new Photo(id, orientation, Integer.parseInt(splitedLine[1]), tags));
+                photos.add(new Photo(""+id, orientation, Integer.parseInt(splitedLine[1]), tags));
                 id++;
             }
 
