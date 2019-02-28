@@ -14,7 +14,7 @@ public class Photo {
         this.tags = tags;
     }
 
-    public int computePointsOfTwoPhotos(Photo p1, Photo p2) {
+    public static int computePointsOfTwoPhotos(Photo p1, Photo p2) {
 
         HashSet<String> p1Tags = new HashSet<>();
         p1Tags.addAll(p1.tags);
@@ -25,11 +25,27 @@ public class Photo {
         HashSet<String> intersaction = new HashSet<>(p1Tags);
         intersaction.retainAll(p2Tags);
 
-        
+        HashSet<String> onlyInP1 = new HashSet<>(p1Tags);
+        onlyInP1.removeAll(p2Tags);
 
+        HashSet<String> onlyInP2 = new HashSet<>(p2Tags);
+        onlyInP2.removeAll(p1Tags);
 
+        int a = intersaction.size();
+        int b = onlyInP1.size();
+        int c = onlyInP2.size();
 
-        return 0;
+        int min = a;
+
+        if(b<min) {
+            min = b;
+        }
+
+        if(c<min) {
+            min = c;
+        }
+
+        return min;
 
     }
 
