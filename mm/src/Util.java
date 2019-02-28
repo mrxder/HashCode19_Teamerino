@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Util {
-    
+
 
 
     public static int numOfCommonTags(Photo p1, Photo p2){
@@ -33,7 +33,7 @@ public class Util {
         try {
 
 
-            BufferedWriter output = new BufferedWriter(new FileWriter(file, true));
+            BufferedWriter output = new BufferedWriter(new FileWriter(file, false));
             output.write(lines.size());
             output.newLine();
 
