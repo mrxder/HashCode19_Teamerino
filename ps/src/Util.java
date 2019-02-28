@@ -15,12 +15,21 @@ public class Util {
         int numOfTagsOnlyInP1 = p1.tags.size() - numOfCommonTags;
         int numOfTagsOnlyInP2 = p2.tags.size() - numOfCommonTags;
 
-        if()
+        int smallest;
+        if (numOfCommonTags <= numOfTagsOnlyInP1 && numOfCommonTags <= numOfTagsOnlyInP2) {
+            smallest = numOfCommonTags;
+        } else if (numOfTagsOnlyInP1 <= numOfTagsOnlyInP2 && numOfTagsOnlyInP1 <= numOfCommonTags) {
+            smallest = numOfTagsOnlyInP1;
+        } else {
+            smallest = numOfTagsOnlyInP2;
+        }
 
+        return smallest;
 
     }
 
 
+    //Todo: Optimize to nlogn
     public static int numOfCommonTags(Photo p1, Photo p2){
 
         ArrayList<String> p1Tags = p1.tags;
@@ -43,7 +52,7 @@ public class Util {
         try {
 
 
-            BufferedWriter output = new BufferedWriter(new FileWriter(file, true));
+            BufferedWriter output = new BufferedWriter(new FileWriter(file, false));
             output.write(lines.size());
             output.newLine();
 
