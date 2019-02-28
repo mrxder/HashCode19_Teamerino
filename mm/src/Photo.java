@@ -4,14 +4,24 @@ import java.util.Objects;
 
 public class Photo {
 
+    public int id;
     public boolean orientation;
     public int noOfTags;
     public ArrayList<String> tags;
 
-    public Photo(boolean orientation, int noOfTags, ArrayList<String> tags) {
+    public Photo(int id, boolean orientation, int noOfTags, ArrayList<String> tags) {
+        this.id = id;
         this.orientation = orientation;
         this.noOfTags = noOfTags;
         this.tags = tags;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public boolean isOrientation() {
