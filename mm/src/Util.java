@@ -1,4 +1,6 @@
 
+import com.sun.xml.internal.ws.binding.FeatureListUtil;
+
 import java.io.*;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -6,6 +8,24 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Util {
+    
+
+
+    public static int numOfCommonTags(Photo p1, Photo p2){
+
+        ArrayList<String> p1Tags = p1.tags;
+        ArrayList<String> p2Tags = p2.tags;
+
+        int result = 0;
+
+        for (String t : p1Tags) {
+            if(p2Tags.contains(t)) {
+                result++;
+            }
+        }
+
+        return result;
+    }
 
     public static void writeFile(String file, ArrayList<String> lines){
 
@@ -32,6 +52,7 @@ public class Util {
     public static ArrayList<Photo> readFile(String file){
 
         ArrayList<Photo> photos = new ArrayList<>();
+        int id = 0;
 
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             br.readLine();
@@ -43,7 +64,8 @@ public class Util {
                 ArrayList<String> tags = new ArrayList<>(tmpTags);
                 tags.remove(0);
                 tags.remove(0);
-                photos.add(new Photo(orientation, Integer.parseInt(splitedLine[1]), tags));
+                photos.add(new Photo(id, orientation, Integer.parseInt(splitedLine[1]), tags));
+                id++;
             }
 
             return photos;
